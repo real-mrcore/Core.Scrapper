@@ -5,13 +5,22 @@
 # Lead Systems Engineer: Mr. Core
 # Communication Node Location: t.me/real_mrcore
 
+import os
 import sys
 
-# Importing targeted structural modules from underlying sub-system directories
-from backend.common.theme import COLOR_RED, COLOR_WHITE, RESET_ALL, clear_console_buffer
-from backend.interface.display import render_system_branding
-from backend.layers.module_html import execute_html_scraping_routine
-from backend.layers.module_css import execute_css_scraping_routine
+# Dynamic standard system environment handler tracking
+try:
+    from backend.common.theme import COLOR_RED, COLOR_WHITE, RESET_ALL, clear_console_buffer
+    from backend.interface.display import render_system_branding
+    from backend.layers.module_html import execute_html_scraping_routine
+    from backend.layers.module_css import execute_css_scraping_routine
+except ImportError:
+    # Append local system paths to prevent cross-module initialization errors
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    from backend.common.theme import COLOR_RED, COLOR_WHITE, RESET_ALL, clear_console_buffer
+    from backend.interface.display import render_system_branding
+    from backend.layers.module_html import execute_html_scraping_routine
+    from backend.layers.module_css import execute_css_scraping_routine
 
 def start_framework_runtime():
     clear_console_buffer()
